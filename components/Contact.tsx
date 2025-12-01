@@ -1,79 +1,77 @@
 import React from 'react';
-import { Mail, MapPin, Phone } from 'lucide-react';
+import { Mail, MapPin, Phone, Send } from 'lucide-react';
 
 const Contact: React.FC = () => {
   return (
-    <section id="contact" className="py-24 bg-brand-dark relative border-t border-white/5">
+    <section id="contact" className="py-24 bg-retro-bg border-t-2 border-retro-gray">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
           
           <div>
-            <h2 className="font-display text-4xl font-bold text-white mb-6">
-              准备好进入<br />
-              <span className="text-brand-glow">数字新纪元了吗？</span>
+            <div className="inline-block bg-retro-orange text-black font-bold px-2 py-1 text-xs mb-4">
+               COMMUNICATION_UPLINK
+            </div>
+            <h2 className="font-display text-4xl font-bold text-white mb-6 uppercase">
+              Establish<br />
+              <span className="text-retro-orange">Connection</span>
             </h2>
-            <p className="text-gray-400 mb-12 text-lg">
-              无论您是想咨询数字孪生解决方案，还是探讨元宇宙合作，氢氪星球的专家团队随时待命。
+            <p className="text-retro-gray mb-12 text-lg font-mono border-l-2 border-retro-gray pl-4">
+              Our operators are standing by. Transmit your query for immediate processing.
             </p>
 
-            <div className="space-y-6">
-              <div className="flex items-start space-x-4">
-                <div className="p-3 bg-white/5 rounded-lg text-brand-glow">
-                  <MapPin className="h-6 w-6" />
-                </div>
+            <div className="space-y-6 font-mono">
+              <div className="flex items-center space-x-4 border border-retro-gray p-4 bg-retro-surface">
+                <MapPin className="h-5 w-5 text-retro-orange" />
                 <div>
-                  <h4 className="text-white font-bold mb-1">总部地址</h4>
-                  <p className="text-gray-400 text-sm">上海市浦东新区张江高科数字岛 88 号 H-Kr 大厦</p>
+                  <h4 className="text-white font-bold text-xs uppercase">Sector Coordinates</h4>
+                  <p className="text-retro-gray text-sm">ZHANGJIANG HI-TECH PARK, SHANGHAI, CN</p>
                 </div>
               </div>
 
-              <div className="flex items-start space-x-4">
-                <div className="p-3 bg-white/5 rounded-lg text-brand-glow">
-                  <Mail className="h-6 w-6" />
-                </div>
+              <div className="flex items-center space-x-4 border border-retro-gray p-4 bg-retro-surface">
+                <Mail className="h-5 w-5 text-retro-orange" />
                 <div>
-                  <h4 className="text-white font-bold mb-1">商务合作</h4>
-                  <p className="text-gray-400 text-sm">business@h-kr.planet</p>
+                  <h4 className="text-white font-bold text-xs uppercase">Digital Mail</h4>
+                  <p className="text-retro-gray text-sm">BUSINESS@H-KR.PLANET</p>
                 </div>
               </div>
 
-              <div className="flex items-start space-x-4">
-                <div className="p-3 bg-white/5 rounded-lg text-brand-glow">
-                  <Phone className="h-6 w-6" />
-                </div>
+              <div className="flex items-center space-x-4 border border-retro-gray p-4 bg-retro-surface">
+                <Phone className="h-5 w-5 text-retro-orange" />
                 <div>
-                  <h4 className="text-white font-bold mb-1">联系电话</h4>
-                  <p className="text-gray-400 text-sm">+86 21 8888 6666</p>
+                  <h4 className="text-white font-bold text-xs uppercase">Voice Line</h4>
+                  <p className="text-retro-gray text-sm">+86 21 8888 6666</p>
                 </div>
               </div>
             </div>
           </div>
 
-          <div className="bg-white/5 p-8 rounded-2xl border border-white/10 backdrop-blur-sm">
-            <form className="space-y-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
-                  <label htmlFor="name" className="block text-sm font-medium text-gray-400 mb-2">姓名</label>
-                  <input type="text" id="name" className="w-full bg-black/40 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-brand-glow focus:ring-1 focus:ring-brand-glow transition-all" placeholder="您的姓名" />
-                </div>
-                <div>
-                  <label htmlFor="company" className="block text-sm font-medium text-gray-400 mb-2">公司</label>
-                  <input type="text" id="company" className="w-full bg-black/40 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-brand-glow focus:ring-1 focus:ring-brand-glow transition-all" placeholder="公司名称" />
-                </div>
+          <div className="bg-black border-2 border-retro-green p-6 font-mono relative shadow-[0_0_20px_rgba(0,255,65,0.1)]">
+            <div className="absolute top-0 left-0 bg-retro-green text-black text-xs px-2 font-bold">TERMINAL_INPUT</div>
+            
+            <form className="space-y-6 mt-6">
+              <div className="space-y-1">
+                <label className="text-retro-green text-xs">> ENTER_IDENTITY</label>
+                <input type="text" className="w-full bg-retro-bg border-b border-retro-green text-white px-2 py-2 focus:outline-none focus:bg-retro-surface placeholder-retro-gray/50" placeholder="NAME" />
               </div>
               
-              <div>
-                <label htmlFor="email" className="block text-sm font-medium text-gray-400 mb-2">邮箱</label>
-                <input type="email" id="email" className="w-full bg-black/40 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-brand-glow focus:ring-1 focus:ring-brand-glow transition-all" placeholder="your@email.com" />
+              <div className="space-y-1">
+                <label className="text-retro-green text-xs">> ENTER_ORG_ID</label>
+                <input type="text" className="w-full bg-retro-bg border-b border-retro-green text-white px-2 py-2 focus:outline-none focus:bg-retro-surface placeholder-retro-gray/50" placeholder="COMPANY" />
+              </div>
+              
+              <div className="space-y-1">
+                <label className="text-retro-green text-xs">> ENTER_COMMS_ADDR</label>
+                <input type="email" className="w-full bg-retro-bg border-b border-retro-green text-white px-2 py-2 focus:outline-none focus:bg-retro-surface placeholder-retro-gray/50" placeholder="EMAIL" />
               </div>
 
-              <div>
-                <label htmlFor="message" className="block text-sm font-medium text-gray-400 mb-2">留言需求</label>
-                <textarea id="message" rows={4} className="w-full bg-black/40 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-brand-glow focus:ring-1 focus:ring-brand-glow transition-all" placeholder="请简述您的项目需求..."></textarea>
+              <div className="space-y-1">
+                <label className="text-retro-green text-xs">> ENTER_DATA_PACKET</label>
+                <textarea rows={4} className="w-full bg-retro-bg border-b border-retro-green text-white px-2 py-2 focus:outline-none focus:bg-retro-surface placeholder-retro-gray/50" placeholder="MESSAGE CONTENT..."></textarea>
               </div>
 
-              <button type="submit" className="w-full bg-gradient-to-r from-brand-accent to-brand-glow text-white font-bold py-4 rounded-lg hover:shadow-[0_0_20px_rgba(0,240,255,0.5)] transition-shadow">
-                发送消息
+              <button type="submit" className="w-full bg-retro-green text-black font-bold py-3 mt-4 hover:bg-white transition-colors flex justify-center items-center uppercase tracking-widest">
+                <Send className="w-4 h-4 mr-2" /> Transmit
               </button>
             </form>
           </div>

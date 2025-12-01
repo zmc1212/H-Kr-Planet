@@ -9,9 +9,13 @@ import Footer from './components/Footer';
 const App: React.FC = () => {
   return (
     <Router>
-      <div className="min-h-screen bg-brand-dark text-white selection:bg-brand-glow selection:text-black flex flex-col">
+      <div className="min-h-screen bg-retro-bg text-retro-white selection:bg-retro-orange selection:text-black flex flex-col font-mono relative">
+        {/* Global CRT Effects */}
+        <div className="crt-overlay"></div>
+        <div className="noise-overlay"></div>
+        
         <Navbar />
-        <main className="flex-grow">
+        <main className="flex-grow pt-[100px] md:pt-[120px]">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />

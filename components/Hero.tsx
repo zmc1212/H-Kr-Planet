@@ -1,11 +1,11 @@
 import React, { useEffect, useRef } from 'react';
-import { ArrowRight, Cpu, Network } from 'lucide-react';
+import { ArrowRight, Cpu, Terminal } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const Hero: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
-  // Digital Twin Planet Animation
+  // Retro Wireframe Planet Animation
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -17,88 +17,74 @@ const Hero: React.FC = () => {
     let height = canvas.height = window.innerHeight;
 
     // Parameters
-    const GLOBE_RADIUS = Math.min(width, height) * 0.25;
-    const DOT_COUNT = 800;
-    const DOT_SIZE = 1.5;
+    const GLOBE_RADIUS = Math.min(width, height) * 0.22;
+    const DOT_COUNT = 600;
     
     // Points array
-    const points: { x: number; y: number; z: number; theta: number; phi: number }[] = [];
-
-    // Initialize Fibonacci Sphere points
+    const points: { x: number; y: number; z: number }[] = [];
     const phi = Math.PI * (3 - Math.sqrt(5)); // Golden angle
 
     for (let i = 0; i < DOT_COUNT; i++) {
-      const y = 1 - (i / (DOT_COUNT - 1)) * 2; // y goes from 1 to -1
-      const radius = Math.sqrt(1 - y * y); // Radius at y
-      
-      const theta = phi * i; // Golden angle increment
-
+      const y = 1 - (i / (DOT_COUNT - 1)) * 2;
+      const radius = Math.sqrt(1 - y * y);
+      const theta = phi * i;
       const x = Math.cos(theta) * radius;
       const z = Math.sin(theta) * radius;
-
-      points.push({ x: x * GLOBE_RADIUS, y: y * GLOBE_RADIUS, z: z * GLOBE_RADIUS, theta, phi });
+      points.push({ x: x * GLOBE_RADIUS, y: y * GLOBE_RADIUS, z: z * GLOBE_RADIUS });
     }
 
-    let rotationX = 0;
     let rotationY = 0;
+    let rotationX = 0;
     let frameId: number;
 
     const render = () => {
-      ctx.fillStyle = '#030712'; // Clear with background color
+      ctx.fillStyle = '#121212';
       ctx.fillRect(0, 0, width, height);
 
-      rotationY += 0.003;
-      rotationX += 0.001;
+      // Draw Grid Background
+      ctx.strokeStyle = '#1e1e1e';
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      for (let x = 0; x <= width; x += 50) { ctx.moveTo(x, 0); ctx.lineTo(x, height); }
+      for (let y = 0; y <= height; y += 50) { ctx.moveTo(0, y); ctx.lineTo(width, y); }
+      ctx.stroke();
 
-      const cx = width / 2 + width * 0.15; // Shift globe slightly right on desktop
+      rotationY += 0.002;
+      rotationX += 0.0005;
+
+      const cx = width * 0.7; // Right aligned on desktop
       const cy = height / 2;
 
-      // Draw connections (lines between close points) - strictly limited for performance
-      ctx.lineWidth = 0.5;
-      
-      points.forEach((point, i) => {
-        // Rotate
+      // Draw Globe
+      points.forEach((point) => {
         let x = point.x;
         let y = point.y;
         let z = point.z;
 
-        // Rotation around Y
+        // Rotate
         let tempX = x * Math.cos(rotationY) - z * Math.sin(rotationY);
         let tempZ = x * Math.sin(rotationY) + z * Math.cos(rotationY);
-        x = tempX;
-        z = tempZ;
+        x = tempX; z = tempZ;
 
-        // Rotation around X
         let tempY = y * Math.cos(rotationX) - z * Math.sin(rotationX);
         tempZ = y * Math.sin(rotationX) + z * Math.cos(rotationX);
-        y = tempY;
-        z = tempZ;
+        y = tempY; z = tempZ;
 
-        // Project 3D to 2D
-        const scale = 300 / (300 + z); // Perspective projection
+        const scale = 300 / (300 + z);
         const screenX = cx + x * scale;
         const screenY = cy + y * scale;
-        const alpha = Math.max(0.1, (scale - 0.5)); // Fade back points
+        const size = Math.max(0.5, 1.5 * scale);
 
-        // Draw Point
-        ctx.beginPath();
-        ctx.arc(screenX, screenY, DOT_SIZE * scale, 0, Math.PI * 2);
+        ctx.fillStyle = '#FF9F1C'; // Retro Orange
+        ctx.fillRect(screenX, screenY, size, size); // Pixels instead of circles
         
-        // Color gradient based on position
-        if (i % 5 === 0) {
-            ctx.fillStyle = `rgba(112, 0, 223, ${alpha})`; // Purple accent
-        } else {
-            ctx.fillStyle = `rgba(0, 240, 255, ${alpha})`; // Cyan primary
-        }
-        
-        ctx.fill();
-
-        // Draw "Data Streams" (Orbit rings)
-        if (i % 100 === 0) {
-            ctx.beginPath();
-            ctx.ellipse(cx, cy, GLOBE_RADIUS * 1.5 * scale, GLOBE_RADIUS * 0.4 * scale, rotationY + i, 0, Math.PI * 2);
-            ctx.strokeStyle = `rgba(255, 255, 255, ${0.05 * alpha})`;
-            ctx.stroke();
+        // Connections
+        if (Math.random() > 0.98) {
+           ctx.beginPath();
+           ctx.moveTo(cx, cy);
+           ctx.lineTo(screenX, screenY);
+           ctx.strokeStyle = 'rgba(255, 159, 28, 0.1)';
+           ctx.stroke();
         }
       });
 
@@ -120,59 +106,50 @@ const Hero: React.FC = () => {
   }, []);
 
   return (
-    <section id="hero" className="relative h-screen w-full flex items-center overflow-hidden bg-brand-dark">
-      {/* Background Canvas */}
-      <canvas ref={canvasRef} className="absolute inset-0 z-0 pointer-events-none opacity-80" />
+    <section id="hero" className="relative min-h-[90vh] w-full flex items-center overflow-hidden bg-retro-bg border-b-2 border-retro-orange">
+      <canvas ref={canvasRef} className="absolute inset-0 z-0 opacity-100" />
       
-      {/* Overlay Gradient */}
-      <div className="absolute inset-0 z-0 bg-gradient-to-r from-brand-dark via-brand-dark/80 to-transparent pointer-events-none"></div>
+      {/* Decorative Overlay UI */}
+      <div className="absolute top-4 right-4 text-xs font-mono text-retro-orange z-10 border border-retro-orange p-2 bg-black/50">
+        <div>COORDS: 34.55.12</div>
+        <div>TARGET: H-Kr PLANET</div>
+        <div className="animate-pulse">SIGNAL: STRONG</div>
+      </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full pt-20">
-        <div className="max-w-3xl">
-          <div className="flex items-center space-x-2 mb-6 animate-pulse-slow">
-            <span className="px-3 py-1 rounded-full border border-brand-glow/50 bg-brand-glow/10 text-brand-glow text-xs font-mono tracking-widest uppercase">
-              System Online v4.0
-            </span>
-            <span className="h-px w-20 bg-gradient-to-r from-brand-glow to-transparent"></span>
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+        <div className="max-w-3xl bg-black/60 p-6 md:p-12 border-l-4 border-retro-orange backdrop-blur-sm">
+          
+          <div className="flex items-center space-x-2 mb-4">
+             <Terminal className="w-4 h-4 text-retro-green" />
+             <p className="text-retro-green font-mono text-sm tracking-widest typing-effect">
+               > INITIALIZING BOOT SEQUENCE...
+             </p>
           </div>
 
-          <h1 className="font-display text-5xl md:text-7xl font-bold text-white leading-tight mb-6">
-            构建未来的 <br/>
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-glow to-brand-accent">
-              数字镜像 (Digital Twin)
-            </span>
+          <h1 className="font-display text-5xl md:text-8xl font-black text-white leading-none mb-6 tracking-tighter uppercase">
+            Digital <br/>
+            <span className="text-retro-orange text-stroke-white">Twin_</span>
           </h1>
 
-          <p className="text-gray-400 text-lg md:text-xl mb-10 max-w-2xl leading-relaxed">
-            氢氪星球致力于将物理世界与数字世界无缝融合。利用 AI 驱动的数字孪生、高保真 XR 渲染引擎，为您打造沉浸式的工业、商业与娱乐元宇宙体验。
+          <p className="text-retro-gray text-lg md:text-xl mb-10 max-w-xl font-mono leading-relaxed border-l border-retro-gray pl-4">
+            // H-Kr Planet System v4.0<br/>
+            Bridging physical reality with high-fidelity digital simulation. XR Rendering / AI Analysis / Meta-Structure.
           </p>
 
           <div className="flex flex-col sm:flex-row items-start sm:items-center space-y-4 sm:space-y-0 sm:space-x-6">
-            <Link to="/solutions" className="group relative px-8 py-4 bg-transparent overflow-hidden rounded-sm transition-all hover:scale-105 inline-block cursor-pointer">
-              <div className="absolute inset-0 w-full h-full bg-brand-glow/20 border border-brand-glow group-hover:bg-brand-glow/30 transition-all"></div>
-              <div className="absolute bottom-0 right-0 w-2 h-2 bg-brand-glow"></div>
-              <div className="absolute top-0 left-0 w-2 h-2 bg-brand-glow"></div>
-              <span className="relative flex items-center font-display font-bold tracking-wider text-white">
-                EXPLORE NOW <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
-              </span>
+            <Link to="/solutions" className="retro-btn-shadow bg-retro-orange text-black px-8 py-4 font-bold tracking-widest uppercase flex items-center border-2 border-retro-orange hover:bg-white transition-colors">
+              <span className="mr-2">Initiate</span> <ArrowRight className="w-5 h-5" />
             </Link>
 
-            <Link to="/about" className="flex items-center space-x-2 text-gray-400 hover:text-white transition-colors cursor-pointer">
-               <div className="p-2 rounded-full bg-white/5 border border-white/10">
-                 <Cpu className="h-5 w-5 text-brand-accent" />
-               </div>
-               <span className="font-sans text-sm">AI Core Active</span>
+            <Link to="/about" className="px-8 py-4 border-2 border-retro-gray text-retro-white font-bold tracking-widest uppercase hover:border-retro-white hover:text-white transition-colors flex items-center">
+               <Cpu className="w-5 h-5 mr-2" /> Read_Log
             </Link>
           </div>
         </div>
       </div>
       
-      {/* Decorative Bottom Elements */}
-      <div className="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-brand-dark to-transparent z-10"></div>
-      <div className="absolute bottom-10 right-10 hidden md:flex space-x-8 text-xs text-gray-500 font-mono">
-        <div className="flex items-center"><Network className="w-4 h-4 mr-2 text-brand-glow"/> LATENCY: 12ms</div>
-        <div className="flex items-center"><div className="w-2 h-2 bg-green-500 rounded-full mr-2 animate-pulse"/> SERVER: STABLE</div>
-      </div>
+      {/* Bottom Tape Strip */}
+      <div className="absolute bottom-0 left-0 w-full h-8 bg-stripes-gray border-t border-retro-gray"></div>
     </section>
   );
 };

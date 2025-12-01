@@ -3,44 +3,49 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>氢氪星球 | 构建数字未来</title>
+    <title>氢氪星球 | H-Kr PLANET</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Orbitron:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;500;700;900&display=swap" rel="stylesheet">
     <script>
       tailwind.config = {
         theme: {
           extend: {
             fontFamily: {
-              sans: ['Inter', 'sans-serif'],
+              mono: ['"Share Tech Mono"', 'monospace'],
               display: ['Orbitron', 'sans-serif'],
             },
             colors: {
-              brand: {
-                dark: '#030712', // slate-950
-                glow: '#00f0ff', // cyan-neon
-                accent: '#7000df', // purple-neon
+              retro: {
+                bg: '#121212',
+                surface: '#1e1e1e',
+                orange: '#FF9F1C', // Amber / Orange
+                red: '#FF4500',
+                green: '#00FF41',
+                white: '#EAEAEA',
+                gray: '#555555',
               }
             },
             animation: {
-              'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-              'float': 'float 6s ease-in-out infinite',
-              'fade-in': 'fadeIn 1s ease-out forwards',
-              'slide-up': 'slideUp 0.8s ease-out forwards',
+              'pulse-fast': 'pulse 1s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+              'glitch': 'glitch 1s linear infinite',
+              'scan': 'scan 8s linear infinite',
+              'typing': 'typing 3.5s steps(40, end)',
             },
             keyframes: {
-              float: {
-                '0%, 100%': { transform: 'translateY(0)' },
-                '50%': { transform: 'translateY(-20px)' },
+              glitch: {
+                '2%, 64%': { transform: 'translate(2px,0) skew(0deg)' },
+                '4%, 60%': { transform: 'translate(-2px,0) skew(0deg)' },
+                '62%': { transform: 'translate(0,0) skew(5deg)' },
               },
-              fadeIn: {
-                '0%': { opacity: '0' },
-                '100%': { opacity: '1' },
+              scan: {
+                '0%': { backgroundPosition: '0 0' },
+                '100%': { backgroundPosition: '0 100%' },
               },
-              slideUp: {
-                '0%': { opacity: '0', transform: 'translateY(20px)' },
-                '100%': { opacity: '1', transform: 'translateY(0)' },
+              typing: {
+                'from': { width: '0' },
+                'to': { width: '100%' },
               }
             }
           }
@@ -48,29 +53,82 @@
       }
     </script>
     <style>
-      /* Custom scrollbar for Webkit */
+      /* Retro Scrollbar */
       ::-webkit-scrollbar {
-        width: 8px;
+        width: 12px;
+        background: #121212;
       }
       ::-webkit-scrollbar-track {
-        background: #030712; 
+        background: #000;
+        border-left: 1px solid #333;
       }
       ::-webkit-scrollbar-thumb {
-        background: #1e293b; 
-        border-radius: 4px;
+        background: #FF9F1C;
+        border: 2px solid #000;
       }
       ::-webkit-scrollbar-thumb:hover {
-        background: #00f0ff; 
+        background: #FFB545;
       }
+      
       body {
-        background-color: #030712;
-        color: white;
+        background-color: #121212;
+        color: #EAEAEA;
         overflow-x: hidden;
+        font-family: 'Share Tech Mono', monospace;
       }
-      .glass-panel {
-        background: rgba(255, 255, 255, 0.03);
-        backdrop-filter: blur(10px);
-        border: 1px solid rgba(255, 255, 255, 0.05);
+
+      /* CRT Scanline Effect */
+      .crt-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: linear-gradient(
+          to bottom,
+          rgba(255, 255, 255, 0),
+          rgba(255, 255, 255, 0) 50%,
+          rgba(0, 0, 0, 0.1) 50%,
+          rgba(0, 0, 0, 0.1)
+        );
+        background-size: 100% 4px;
+        pointer-events: none;
+        z-index: 9999;
+        animation: scan 1s linear infinite; /* Optional: make it move slightly? keeping static is less dizzying */
+      }
+
+      .noise-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 9998;
+        opacity: 0.03;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+      }
+
+      .chamfer-border {
+        clip-path: polygon(
+          10px 0, 100% 0, 
+          100% calc(100% - 10px), calc(100% - 10px) 100%, 
+          0 100%, 0 10px
+        );
+      }
+      
+      .retro-btn-shadow {
+        box-shadow: 4px 4px 0px 0px #FF9F1C;
+        transition: all 0.1s;
+      }
+      .retro-btn-shadow:active {
+        transform: translate(2px, 2px);
+        box-shadow: 2px 2px 0px 0px #FF9F1C;
+      }
+
+      ::selection {
+        background: #FF9F1C;
+        color: #000;
       }
     </style>
   <script type="importmap">

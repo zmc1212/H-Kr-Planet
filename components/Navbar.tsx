@@ -1,30 +1,20 @@
-import React, { useState, useEffect } from 'react';
-import { Menu, X, Globe } from 'lucide-react';
+import React, { useState } from 'react';
+import { Menu, X, Disc, Activity } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 import { NavItem } from '../types';
 
 const navItems: NavItem[] = [
-  { label: '首页', href: '/' },
-  { label: '核心技术', href: '/solutions' },
-  { label: '关于我们', href: '/about' },
-  { label: '未来视界', href: '/#showcase' }, // Anchor on home
-  { label: '联系我们', href: '/#contact' },  // Anchor on home
+  { label: 'HOME', href: '/' },
+  { label: 'TECH_STACK', href: '/solutions' },
+  { label: 'DATABASE', href: '/about' },
+  { label: 'VISUALS', href: '/#showcase' },
+  { label: 'COMM_LINK', href: '/#contact' },
 ];
 
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  // Handle anchor links scrolling if on home page
   const handleNavClick = (href: string) => {
     setIsOpen(false);
     if (href.startsWith('/#')) {
@@ -33,78 +23,96 @@ const Navbar: React.FC = () => {
         const element = document.getElementById(elementId);
         element?.scrollIntoView({ behavior: 'smooth' });
       }
-      // If not on home, the Link component handles the navigation to /, 
-      // then we need a way to scroll (usually handled by a ScrollToTop or useEffect in Home)
     }
   };
 
   return (
-    <nav 
-      className={`fixed w-full z-50 transition-all duration-300 ${
-        scrolled || location.pathname !== '/'
-          ? 'bg-brand-dark/80 backdrop-blur-md border-b border-white/10 py-3' 
-          : 'bg-transparent py-6'
-      }`}
-    >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between">
-          <Link to="/" className="flex items-center space-x-2 group cursor-pointer">
-            <div className="relative">
-              <div className="absolute inset-0 bg-brand-glow blur-sm opacity-50 group-hover:opacity-100 transition-opacity rounded-full"></div>
-              <Globe className="h-8 w-8 text-white relative z-10" />
+    <header className="fixed w-full z-50 top-0 left-0">
+      {/* Top Marquee Bar */}
+      <div className="bg-retro-orange text-black py-1 overflow-hidden border-b-2 border-black">
+        <div className="whitespace-nowrap animate-scan flex space-x-8 text-xs font-bold tracking-widest">
+           {[...Array(10)].map((_, i) => (
+             <span key={i}>// SYSTEM ONLINE // CONNECTED TO H-Kr NET // LATENCY: 12ms // MEMORY: 64TB OK // </span>
+           ))}
+        </div>
+      </div>
+
+      {/* Main Nav Bar */}
+      <div className="bg-retro-bg/95 border-b-2 border-retro-gray backdrop-blur-md">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-16 md:h-20">
+            
+            {/* Logo Area */}
+            <Link to="/" className="flex items-center space-x-3 group cursor-pointer border-2 border-retro-gray p-2 hover:border-retro-orange transition-colors bg-black">
+              <Disc className="h-6 w-6 text-retro-orange animate-spin-slow" />
+              <div className="flex flex-col leading-none">
+                <span className="font-display font-bold text-xl tracking-tighter text-white">
+                  H-Kr <span className="text-retro-orange">PLANET</span>
+                </span>
+                <span className="text-[10px] text-retro-gray font-mono tracking-widest">DIGITAL TWIN CORP</span>
+              </div>
+            </Link>
+            
+            {/* Desktop Nav */}
+            <div className="hidden md:block">
+              <div className="ml-10 flex items-center space-x-1">
+                {navItems.map((item) => (
+                  <Link
+                    key={item.label}
+                    to={item.href}
+                    onClick={() => handleNavClick(item.href)}
+                    className={`
+                      px-4 py-2 text-sm font-bold tracking-wider border border-transparent hover:border-retro-orange hover:bg-retro-surface hover:text-retro-orange transition-all
+                      ${location.pathname === item.href ? 'bg-retro-orange text-black hover:bg-retro-orange hover:text-black' : 'text-retro-white'}
+                    `}
+                  >
+                    [{item.label}]
+                  </Link>
+                ))}
+              </div>
             </div>
-            <span className="font-display font-bold text-xl tracking-wider text-white">
-              H-Kr <span className="text-brand-glow">PLANET</span>
-            </span>
-          </Link>
-          
-          <div className="hidden md:block">
-            <div className="ml-10 flex items-baseline space-x-8">
-              {navItems.map((item) => (
-                <Link
-                  key={item.label}
-                  to={item.href}
-                  onClick={() => handleNavClick(item.href)}
-                  className={`font-sans text-sm font-medium transition-all duration-200 hover:scale-105 transform relative group ${
-                    location.pathname === item.href ? 'text-brand-glow' : 'text-gray-300 hover:text-brand-glow'
-                  }`}
-                >
-                  {item.label}
-                  <span className={`absolute -bottom-1 left-0 w-0 h-0.5 bg-brand-glow transition-all duration-300 group-hover:w-full ${location.pathname === item.href ? 'w-full' : ''}`}></span>
-                </Link>
-              ))}
+
+            {/* Status Indicator (Desktop) */}
+            <div className="hidden md:flex items-center space-x-4 border-l-2 border-retro-gray pl-6">
+               <div className="flex flex-col items-end">
+                  <span className="text-[10px] text-retro-gray">SYS_STATUS</span>
+                  <div className="flex items-center text-retro-green text-xs font-bold">
+                    <Activity className="w-3 h-3 mr-1 animate-pulse" /> ONLINE
+                  </div>
+               </div>
             </div>
-          </div>
-          
-          <div className="md:hidden">
-            <button
-              onClick={() => setIsOpen(!isOpen)}
-              className="text-gray-300 hover:text-white focus:outline-none"
-            >
-              {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-            </button>
+            
+            {/* Mobile Menu Button */}
+            <div className="md:hidden">
+              <button
+                onClick={() => setIsOpen(!isOpen)}
+                className="bg-retro-surface p-2 border border-retro-gray text-retro-orange hover:bg-retro-orange hover:text-black transition-colors"
+              >
+                {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+              </button>
+            </div>
           </div>
         </div>
       </div>
 
       {/* Mobile Menu */}
       {isOpen && (
-        <div className="md:hidden bg-brand-dark/95 backdrop-blur-xl border-b border-white/10 absolute w-full z-50">
+        <div className="md:hidden bg-retro-bg border-b-2 border-retro-orange absolute w-full z-50">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
             {navItems.map((item) => (
               <Link
                 key={item.label}
                 to={item.href}
                 onClick={() => handleNavClick(item.href)}
-                className="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-white/10"
+                className="block px-3 py-4 text-base font-bold text-retro-white hover:bg-retro-orange hover:text-black border-l-4 border-transparent hover:border-black transition-all"
               >
-                {item.label}
+                {'>'} {item.label}
               </Link>
             ))}
           </div>
         </div>
       )}
-    </nav>
+    </header>
   );
 };
 
