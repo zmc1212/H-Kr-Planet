@@ -18,7 +18,7 @@ const Showcase: React.FC = () => {
               <h3 className="font-display text-3xl md:text-4xl font-bold text-white">未来视界展示</h3>
            </div>
            <button className="hidden md:block text-brand-glow hover:text-white font-mono text-sm border-b border-brand-glow pb-1 transition-colors">
-              VIEW ALL PROJECTS ->
+              VIEW ALL PROJECTS &rarr;
            </button>
         </div>
 
@@ -54,7 +54,7 @@ const Showcase: React.FC = () => {
         
         <div className="mt-16 md:hidden text-center">
              <button className="text-brand-glow hover:text-white font-mono text-sm border-b border-brand-glow pb-1 transition-colors">
-              VIEW ALL PROJECTS ->
+              VIEW ALL PROJECTS &rarr;
            </button>
         </div>
       </div>
