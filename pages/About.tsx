@@ -52,11 +52,13 @@ const About: React.FC = () => {
                         We don't just write code; we fabricate reality. Using high-precision physics engines, we give the digital world weight, friction, and light.
                      </p>
                      
-                     <div className="bg-black p-4 border border-retro-green/50 text-retro-green text-xs mt-6">
-                        > MISSION_STATUS: ACTIVE<br/>
-                        > PROGRESS: 75%<br/>
-                        > TARGET: SECOND_SURVIVAL_SPACE
-                     </div>
+            // pages/About.tsx (位于大约 55 行)
+
+<div className="bg-black p-4 border border-retro-green/50 text-retro-green text-xs mt-6">
+  &gt; MISSION_STATUS: ACTIVE<br/> // 使用 &gt; 替换 >
+  &gt; PROGRESS: 75%<br/>        // 使用 &gt; 替换 >
+  &gt; TARGET: SECOND_SURVIVAL_SPACE // 使用 &gt; 替换 >
+</div>
                  </div>
             </div>
         </div>
