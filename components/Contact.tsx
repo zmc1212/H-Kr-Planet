@@ -51,22 +51,22 @@ const Contact: React.FC = () => {
             
             <form className="space-y-6 mt-6">
               <div className="space-y-1">
-                <label className="text-retro-green text-xs">> ENTER_IDENTITY</label>
+                <label className="text-retro-green text-xs">&gt; ENTER_IDENTITY</label>
                 <input type="text" className="w-full bg-retro-bg border-b border-retro-green text-white px-2 py-2 focus:outline-none focus:bg-retro-surface placeholder-retro-gray/50" placeholder="NAME" />
               </div>
               
               <div className="space-y-1">
-                <label className="text-retro-green text-xs">> ENTER_ORG_ID</label>
+                <label className="text-retro-green text-xs">&gt; ENTER_ORG_ID</label>
                 <input type="text" className="w-full bg-retro-bg border-b border-retro-green text-white px-2 py-2 focus:outline-none focus:bg-retro-surface placeholder-retro-gray/50" placeholder="COMPANY" />
               </div>
               
               <div className="space-y-1">
-                <label className="text-retro-green text-xs">> ENTER_COMMS_ADDR</label>
+                <label className="text-retro-green text-xs">&gt; ENTER_COMMS_ADDR</label>
                 <input type="email" className="w-full bg-retro-bg border-b border-retro-green text-white px-2 py-2 focus:outline-none focus:bg-retro-surface placeholder-retro-gray/50" placeholder="EMAIL" />
               </div>
 
               <div className="space-y-1">
-                <label className="text-retro-green text-xs">> ENTER_DATA_PACKET</label>
+                <label className="text-retro-green text-xs">&gt; ENTER_DATA_PACKET</label>
                 <textarea rows={4} className="w-full bg-retro-bg border-b border-retro-green text-white px-2 py-2 focus:outline-none focus:bg-retro-surface placeholder-retro-gray/50" placeholder="MESSAGE CONTENT..."></textarea>
               </div>
 

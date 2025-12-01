@@ -106,7 +106,7 @@ const Navbar: React.FC = () => {
                 onClick={() => handleNavClick(item.href)}
                 className="block px-3 py-4 text-base font-bold text-retro-white hover:bg-retro-orange hover:text-black border-l-4 border-transparent hover:border-black transition-all"
               >
-                {'>'} {item.label}
+                &gt; {item.label}
               </Link>
             ))}
           </div>

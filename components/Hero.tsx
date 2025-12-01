@@ -122,7 +122,7 @@ const Hero: React.FC = () => {
           <div className="flex items-center space-x-2 mb-4">
              <Terminal className="w-4 h-4 text-retro-green" />
              <p className="text-retro-green font-mono text-sm tracking-widest typing-effect">
-               > INITIALIZING BOOT SEQUENCE...
+               &gt; INITIALIZING BOOT SEQUENCE...
              </p>
           </div>
 

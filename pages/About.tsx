@@ -52,8 +52,6 @@ const About: React.FC = () => {
                 We don't just write code; we fabricate reality. Using high-precision physics engines, we give the digital world weight, friction, and light.
               </p>
 
-                // pages/About.tsx (位于大约 55 行)
-
               <div className="bg-black p-4 border border-retro-green/50 text-retro-green text-xs mt-6">
                 &gt; MISSION_STATUS: ACTIVE<br />
                 &gt; PROGRESS: 75%<br />
