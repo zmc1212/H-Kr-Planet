@@ -18,7 +18,7 @@ const Hero: React.FC = () => {
 
     // Parameters
     const GLOBE_RADIUS = Math.min(width, height) * 0.22;
-    const DOT_COUNT = 600;
+    const DOT_COUNT = 700;
     
     // Points array
     const points: { x: number; y: number; z: number }[] = [];
@@ -73,17 +73,17 @@ const Hero: React.FC = () => {
         const scale = 300 / (300 + z);
         const screenX = cx + x * scale;
         const screenY = cy + y * scale;
-        const size = Math.max(0.5, 1.5 * scale);
+        const size = Math.max(0.6, 1.8 * scale);
 
         ctx.fillStyle = '#FF9F1C'; // Retro Orange
         ctx.fillRect(screenX, screenY, size, size); // Pixels instead of circles
         
         // Connections
-        if (Math.random() > 0.98) {
+        if (Math.random() > 0.985) {
            ctx.beginPath();
            ctx.moveTo(cx, cy);
            ctx.lineTo(screenX, screenY);
-           ctx.strokeStyle = 'rgba(255, 159, 28, 0.1)';
+           ctx.strokeStyle = 'rgba(255, 159, 28, 0.15)';
            ctx.stroke();
         }
       });
@@ -110,46 +110,48 @@ const Hero: React.FC = () => {
       <canvas ref={canvasRef} className="absolute inset-0 z-0 opacity-100" />
       
       {/* Decorative Overlay UI */}
-      <div className="absolute top-4 right-4 text-xs font-mono text-retro-orange z-10 border border-retro-orange p-2 bg-black/50">
+      <div className="absolute top-4 right-4 text-xs font-mono text-retro-orange z-10 border border-retro-orange p-2 bg-black/50 backdrop-blur">
         <div>COORDS: 34.55.12</div>
-        <div>TARGET: H-Kr PLANET</div>
-        <div className="animate-pulse">SIGNAL: STRONG</div>
+        <div>TARGET: 氢氪星球 HQ</div>
+        <div className="animate-pulse">SIGNAL: 信号强</div>
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-        <div className="max-w-3xl bg-black/60 p-6 md:p-12 border-l-4 border-retro-orange backdrop-blur-sm">
+        <div className="max-w-3xl bg-black/70 p-6 md:p-12 border-l-4 border-retro-orange backdrop-blur-sm shadow-[10px_10px_0px_0px_rgba(30,30,30,1)]">
           
           <div className="flex items-center space-x-2 mb-4">
              <Terminal className="w-4 h-4 text-retro-green" />
              <p className="text-retro-green font-mono text-sm tracking-widest typing-effect">
-               &gt; INITIALIZING BOOT SEQUENCE...
+               &gt; 初始化启动序列... 系统准备就绪
              </p>
           </div>
 
           <h1 className="font-display text-5xl md:text-8xl font-black text-white leading-none mb-6 tracking-tighter uppercase">
-            Digital <br/>
-            <span className="text-retro-orange text-stroke-white">Twin_</span>
+            数字 <br/>
+            <span className="text-retro-orange text-stroke-white">孪生世界_</span>
           </h1>
 
           <p className="text-retro-gray text-lg md:text-xl mb-10 max-w-xl font-mono leading-relaxed border-l border-retro-gray pl-4">
             // H-Kr Planet System v4.0<br/>
-            Bridging physical reality with high-fidelity digital simulation. XR Rendering / AI Analysis / Meta-Structure.
+            连接物理现实与高保真数字模拟。XR 渲染 / AI 空间计算 / 元宇宙基建。我们构建未来的数字骨架。
           </p>
 
           <div className="flex flex-col sm:flex-row items-start sm:items-center space-y-4 sm:space-y-0 sm:space-x-6">
-            <Link to="/solutions" className="retro-btn-shadow bg-retro-orange text-black px-8 py-4 font-bold tracking-widest uppercase flex items-center border-2 border-retro-orange hover:bg-white transition-colors">
-              <span className="mr-2">Initiate</span> <ArrowRight className="w-5 h-5" />
+            <Link to="/solutions" className="retro-btn-shadow bg-retro-orange text-black px-8 py-4 font-bold tracking-widest uppercase flex items-center border-2 border-retro-orange hover:bg-white hover:border-white transition-all font-mono group">
+              <span className="mr-2">开启探索</span> <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </Link>
 
-            <Link to="/about" className="px-8 py-4 border-2 border-retro-gray text-retro-white font-bold tracking-widest uppercase hover:border-retro-white hover:text-white transition-colors flex items-center">
-               <Cpu className="w-5 h-5 mr-2" /> Read_Log
+            <Link to="/about" className="px-8 py-4 border-2 border-retro-gray text-retro-white font-bold tracking-widest uppercase hover:border-retro-white hover:text-white transition-colors flex items-center font-mono hover:bg-retro-surface">
+               <Cpu className="w-5 h-5 mr-2" /> 读取日志
             </Link>
           </div>
         </div>
       </div>
       
       {/* Bottom Tape Strip */}
-      <div className="absolute bottom-0 left-0 w-full h-8 bg-stripes-gray border-t border-retro-gray"></div>
+      <div className="absolute bottom-0 left-0 w-full h-8 bg-stripes-gray border-t border-retro-gray flex items-center justify-end px-4">
+          <span className="text-[10px] text-black bg-retro-orange px-1 font-mono font-bold">CAUTION: HIGH VOLTAGE</span>
+      </div>
     </section>
   );
 };

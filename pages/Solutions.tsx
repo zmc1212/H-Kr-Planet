@@ -3,28 +3,28 @@ import { Layers, Cpu, Globe, Smartphone, ArrowRight } from 'lucide-react';
 
 const solutions = [
   {
-    title: "IND_METAVERSE_PLATFORM",
+    title: "工业元宇宙平台",
     icon: <Layers className="w-8 h-8" />,
-    desc: "WebGPU-based massive scene rendering. Real-time IoT data injection. Full lifecycle management.",
-    features: ["10M+ POLYGON SUPPORT", "SUB-SECOND LATENCY", "MULTI-TERMINAL SYNC"]
+    desc: "基于 WebGPU 的海量场景渲染。实时 IoT 数据注入。全生命周期管理系统。",
+    features: ["支持千万级面数", "亚秒级延迟", "多终端同步"]
   },
   {
-    title: "CITY_DIGITAL_BASE",
+    title: "城市数字底座 CIM",
     icon: <Globe className="w-8 h-8" />,
-    desc: "CIM (City Information Modeling) data center. GIS + BIM fusion. Smart city governance.",
-    features: ["SPATIAL AWARENESS", "TRAFFIC SIMULATION", "EMERGENCY COMMAND"]
+    desc: "CIM (City Information Modeling) 数据中心。GIS + BIM 深度融合。智慧城市治理。",
+    features: ["空间感知", "交通流仿真", "应急指挥大屏"]
   },
   {
-    title: "XR_MARKETING_INTERACT",
+    title: "XR 营销交互",
     icon: <Smartphone className="w-8 h-8" />,
-    desc: "AR Try-on, VR Showrooms. Boosting user engagement and conversion rates.",
-    features: ["WEBAR (NO INSTALL)", "CROSS-PLATFORM", "PBR MATERIALS"]
+    desc: "AR 试穿试戴，VR 虚拟展厅。提升用户参与度和转化率的沉浸式体验。",
+    features: ["WebAR (无需安装)", "跨平台支持", "PBR 材质还原"]
   },
   {
-    title: "AIGC_CONTENT_GEN",
+    title: "AIGC 内容生成",
     icon: <Cpu className="w-8 h-8" />,
-    desc: "Automated 3D model, texture, and scene generation using Generative AI.",
-    features: ["TEXT-TO-3D", "SMART TEXTURING", "NPC BEHAVIOR TREES"]
+    desc: "利用生成式 AI 自动化生成 3D 模型、纹理和场景布局。",
+    features: ["文字生成 3D", "智能纹理映射", "NPC 行为树"]
   }
 ];
 
@@ -35,11 +35,11 @@ const Solutions: React.FC = () => {
         
         <div className="mb-16 border-b-4 border-retro-orange pb-8">
           <div className="flex items-center space-x-2 text-retro-orange mb-2">
-             <span className="w-3 h-3 bg-retro-orange"></span>
-             <span className="font-mono text-xs">TECHNICAL_MANUAL_V4.0</span>
+             <span className="w-3 h-3 bg-retro-orange animate-pulse"></span>
+             <span className="font-mono text-xs">TECHNICAL_MANUAL_V4.0 // 技术手册</span>
           </div>
           <h1 className="font-display text-5xl md:text-6xl font-black uppercase text-white tracking-tighter">
-            System <span className="text-transparent bg-clip-text bg-gradient-to-r from-retro-orange to-yellow-500">Solutions</span>
+            系统 <span className="text-transparent bg-clip-text bg-gradient-to-r from-retro-orange to-yellow-500">解决方案</span>
           </h1>
         </div>
 
@@ -55,7 +55,7 @@ const Solutions: React.FC = () => {
               </div>
               
               <div className="flex items-start space-x-6">
-                <div className="p-4 bg-retro-surface border border-retro-gray text-retro-orange">
+                <div className="p-4 bg-retro-surface border border-retro-gray text-retro-orange group-hover:bg-retro-orange group-hover:text-black transition-colors">
                   {sol.icon}
                 </div>
                 <div className="flex-1">
@@ -78,15 +78,15 @@ const Solutions: React.FC = () => {
 
         {/* Process Flowchart Style */}
         <div className="border-t-2 border-dashed border-retro-gray pt-20 pb-20">
-             <h2 className="font-display text-3xl font-bold mb-12 text-center uppercase">Deployment Protocol</h2>
+             <h2 className="font-display text-3xl font-bold mb-12 text-center uppercase">部署协议流程</h2>
              <div className="flex flex-col md:flex-row justify-between relative px-4">
                  
                  {/* Line */}
                  <div className="hidden md:block absolute top-6 left-0 w-full h-0.5 bg-retro-gray z-0"></div>
 
-                 {['ANALYSIS', 'PROTOTYPE', 'DEVELOP', 'TEST_DEPLOY', 'MAINTAIN'].map((step, idx) => (
+                 {['需求分析', '原型设计', '开发构建', '测试部署', '长期维护'].map((step, idx) => (
                      <div key={idx} className="relative z-10 flex flex-col items-center text-center mb-8 md:mb-0 group">
-                         <div className="w-12 h-12 bg-retro-bg border-2 border-retro-gray group-hover:border-retro-orange group-hover:bg-retro-orange group-hover:text-black transition-all flex items-center justify-center font-bold text-retro-white mb-4">
+                         <div className="w-12 h-12 bg-retro-bg border-2 border-retro-gray group-hover:border-retro-orange group-hover:bg-retro-orange group-hover:text-black transition-all flex items-center justify-center font-bold text-retro-white mb-4 cursor-default">
                              0{idx + 1}
                          </div>
                          <h4 className="font-bold text-white font-mono text-sm tracking-wider">{step}</h4>
